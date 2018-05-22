@@ -1,0 +1,23 @@
+{
+  "name": "whistle-gh-pages",
+  "version": "1.0.0",
+  "description": "whistle gh-pages",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/echopi/whistle-gh-pages.git",
+  "keywords": [
+    "gh-pages",
+    "gitbook",
+    "docker",
+    "node"
+  ],
+  "author": "jiewei.ljw",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.5.1",
+    "koa-router": "^7.4.0"
+  }
+}
