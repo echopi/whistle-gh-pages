@@ -17,6 +17,7 @@
   "author": "jiewei.ljw",
   "license": "MIT",
   "dependencies": {
+    "egg-logger": "^1.6.2",
     "koa": "^2.5.1",
     "koa-router": "^7.4.0"
   }
