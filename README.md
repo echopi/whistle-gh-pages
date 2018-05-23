@@ -6,6 +6,8 @@
 
 利用 github 的 webhook 机制，可以设置某个事件触发后调用一个远程 API。照这个思路，如果在某一台服务器部署一个服务，调用 API 即执行相关的脚本，将 gitbook 生成的静态资源 push 到远程 gh-pages 分支，就可以实现自动部署文档到 github。
 
+脚本参考：https://github.com/echopi/whistle/blob/master/docs/script/build-book.sh
+
 ## 前提
 
 1. 设置项目的 gh-pages 通过 `gh-pages` 分支编译。
