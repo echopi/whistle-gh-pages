@@ -11,7 +11,7 @@ WORKDIR /home/node/app
 VOLUME [ "/home/node/whistle", "/home/node/app/logs" ]
 
 COPY package*.json ./
-RUN npm install -c
+RUN npm install --registry=https://registry.npm.taobao.org
 COPY . .
 
 EXPOSE 6001
