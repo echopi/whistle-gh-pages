@@ -42,6 +42,7 @@ docker run \
   git clone https://github.com/avwo/whistle.git ~/whistle
   ```
 2. 设置 ssh 到 github，参考：https://help.github.com/articles/connecting-to-github-with-ssh/
+3. 项目提供编译脚本，路径 `docs/script/build-book.sh`
 
 ### 步骤三：
 
