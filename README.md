@@ -10,44 +10,31 @@
 
 ## 前提
 
-1. 设置项目的 gh-pages 通过 `gh-pages` 分支编译。
+提供 API 的应用需要有能力 push 代码到远程分支
 
-  ![gh-pages](./assets/gh-pages-setting.png)
-2. 提供 API 的应用需要有能力 push 代码到远程分支
-3. 在项目下设置 webhook，调用远程 API
+## 步骤
 
-## 部署 API
+### 步骤一：
 
-远程主机安装 docker 程序，拉镜像
+远程主机部署服务，注意 `-v` 参数，把容器的日志、whistle 目录挂载到主机
 
 ```sh
 docker pull jiewei/whistle-gh-pages:1.0.0.alpha
-docker images
-```
 
-从镜像启动容器
-
-```sh
-# start container from an image
 docker run \
   --rm \
   -d --init \
   -m "300M" --memory-swap "1G" \
-  -v ~/logs/whistle-gh-pages:/home/node/app/logs \
-  -v ~/work/code/w2/whistle:/home/node/whistle \
   -p 6001:6001 \
   --name whistle-gh-pages \
+  -v ~/logs/whistle-gh-pages:/home/node/app/logs \
+  -v ~/whistle:/home/node/whistle \
   jiewei/whistle-gh-pages:1.0.0
 ```
 
-进入到容器
+服务部署后，暴露一个 API: `ip:6001/api/whistle/build`
 
-```sh
-# Run a command in a running container
-docker exec -it  whistle-gh-pages bash
-```
-
-## whistle 代码
+### 步骤二：
 
 1. 在远程主机，pull 项目的代码到 ~/$PROJECT_NAME
 
@@ -56,6 +43,13 @@ docker exec -it  whistle-gh-pages bash
   ```
 2. 设置 ssh 到 github，参考：https://help.github.com/articles/connecting-to-github-with-ssh/
 
+### 步骤三：
+
+设置项目的 gh-pages 通过 `gh-pages` 分支编译
+
+### 步骤四：
+
+在项目下设置 webhook，调用远程 API
 
 ## API 说明
 
@@ -73,6 +67,9 @@ docker build . -t jiewei/whistle-gh-pages:1.0.0
 
 # push an image
 docker push jiewei/whistle-gh-pages:1.0.0
+
+# Run a command in a running container
+docker exec -it  whistle-gh-pages bash
 
 cat /etc/issue
 ```
