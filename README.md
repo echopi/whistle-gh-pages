@@ -47,6 +47,8 @@ docker run \
 
 设置项目的 gh-pages 通过 `gh-pages` 分支编译
 
+![gh-pages](./assets/gh-pages-setting.png)
+
 ### 步骤四：
 
 在项目下设置 webhook，调用远程 API
