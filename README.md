@@ -35,9 +35,9 @@ docker run \
   -m "300M" --memory-swap "1G" \
   -v ~/logs/whistle-gh-pages:/home/node/app/logs \
   -v ~/work/code/w2/whistle:/home/node/whistle \
-  -p 7001:6001 \
+  -p 6001:6001 \
   --name whistle-gh-pages \
-  jiewei/whistle-gh-pages:1.0.0.alpha
+  jiewei/whistle-gh-pages:1.0.0
 ```
 
 进入到容器
@@ -69,10 +69,10 @@ docker exec -it  whistle-gh-pages bash
 
 ```sh
 # build an image
-docker build . -t jiewei/whistle-gh-pages:0.0.3
+docker build . -t jiewei/whistle-gh-pages:1.0.0
 
 # push an image
-docker push jiewei/whistle-gh-pages:1.0.0.alpha
+docker push jiewei/whistle-gh-pages:1.0.0
 
 cat /etc/issue
 ```
