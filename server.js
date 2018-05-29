@@ -22,7 +22,7 @@ app.logger = getAppLogger();
 router.get('/', (ctx, next) => {
   ctx.body = 'Hello Koa';
 });
-router.get('/api/whistle/build', (ctx, next) => {
+router.post('/api/whistle/build', (ctx, next) => {
   const cmdFile = path.join(whistleRoot, buildCmdPath);
 
   if (!fs.existsSync(cmdFile)) {
