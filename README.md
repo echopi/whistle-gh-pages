@@ -16,23 +16,24 @@
 
 ### 步骤一：
 
-远程主机部署服务，注意 `-v` 参数，把容器的日志、whistle 目录挂载到主机
+远程主机部署服务
 
 ```sh
-docker pull jiewei/whistle-gh-pages:1.0.0.alpha
+# 添加一个 node 普通用户，用户名字不重要
+useradd node
 
-docker run \
-  --rm \
-  -d --init \
-  -m "300M" --memory-swap "1G" \
-  -p 6001:6001 \
-  --name whistle-gh-pages \
-  -v ~/logs/whistle-gh-pages:/home/node/app/logs \
-  -v ~/whistle:/home/node/whistle \
-  jiewei/whistle-gh-pages:1.0.0
+# 设置密码 hello1234
+passwd node
+
+su - node
+
+git clone https://github.com/echopi/whistle-gh-pages.git ～/whistle
+
+npm i --registry=https://registry.npm.taobao.org
+node . &
 ```
 
-服务部署后，暴露一个 API: `ip:6001/api/whistle/build`
+服务部署后，默认端口 6001，以及编译 gitbook 文档的 API: `ip:6001/api/whistle/build`
 
 ### 步骤二：
 
@@ -41,8 +42,13 @@ docker run \
   ```sh
   git clone https://github.com/avwo/whistle.git ~/whistle
   ```
-2. 设置 ssh 到 github，参考：https://help.github.com/articles/connecting-to-github-with-ssh/
+2. 设置 ssh 到 github，参考：https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux
 3. 项目提供编译脚本，路径 `docs/script/build-book.sh`
+
+```sh
+# test ssh
+ssh -T git@github.com
+```
 
 ### 步骤三：
 
@@ -62,17 +68,16 @@ docker run \
 | `/app.log`      | GET      |  app log |
 | `/`      | GET      |  'Hello Koa' |
 
-## 其他命令参考
+## 用户权限问题
 
 ```sh
-# build an image
-docker build . -t jiewei/whistle-gh-pages:1.0.0
-
-# push an image
-docker push jiewei/whistle-gh-pages:1.0.0
-
-# Run a command in a running container
-docker exec -it  whistle-gh-pages bash
-
-cat /etc/issue
+useradd node
+chown -R node: ~/logs/whistle-gh-pages
+chown -R node: ~/whistle
 ```
+
+## 其他问题
+
+1. [升级 git](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x)
+2. [Push to github without password using ssh-key](https://stackoverflow.com/questions/14762034/push-to-github-without-password-using-ssh-key)
+
