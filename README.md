@@ -68,16 +68,18 @@ ssh -T git@github.com
 | `/app.log`      | GET      |  app log |
 | `/`      | GET      |  'Hello Koa' |
 
-## 用户权限问题
+## 用户权限及防火墙问题
 
 ```sh
 useradd node
 chown -R node: ~/logs/whistle-gh-pages
 chown -R node: ~/whistle
+
+firewall-cmd --zone=public --add-port=6001/tcp --permanent
+firewall-cmd --reload
 ```
 
 ## 其他问题
 
 1. [升级 git](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x)
 2. [Push to github without password using ssh-key](https://stackoverflow.com/questions/14762034/push-to-github-without-password-using-ssh-key)
-
